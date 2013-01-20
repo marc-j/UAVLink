@@ -12,7 +12,8 @@ enum UAVLINK_CMD
    UAVLINK_MSG_SYSTEM,
    UAVLINK_MSG_COMMAND,
    UAVLINK_MSG_PID,
-   UAVLINK_MSG_MOTOR
+   UAVLINK_MSG_MOTOR,
+   UAVLINK_MSG_SENSOR_RAW
 };
 
 typedef struct __uavlink_message {
@@ -34,5 +35,6 @@ static inline uint16_t _UAVLINK_RETURN_uint16_t(const uavlink_message_t* msg, ui
 #include "msg/MessageMotor.h"
 #include "msg/MessageCommand.h"
 #include "msg/MessagePID.h"
+#include "msg/MessageSensorRaw.h"
 
 #endif // UAVLINK_MESSAGE_H
