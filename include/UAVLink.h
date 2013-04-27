@@ -36,5 +36,6 @@ static inline uint16_t _UAVLINK_RETURN_uint16_t(const uavlink_message_t* msg, ui
 #include "msg/MessageCommand.h"
 #include "msg/MessagePID.h"
 #include "msg/MessageSensorRaw.h"
+#include "msg/MessageSensorVariance.h"
 
 #endif // UAVLINK_MESSAGE_H
