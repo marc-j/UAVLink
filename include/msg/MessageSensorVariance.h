@@ -5,7 +5,7 @@
  # SENSORS
  #--------------------------------------------------*/
 
-#define UAVLINK_MSG_SENSOR_VARIANCE_LEN 24
+#define UAVLINK_MSG_SENSOR_VARIANCE_LEN 12
 typedef struct __uavlink_message_sensor_variance {
     int16_t accX;
     int16_t accY;
@@ -33,7 +33,7 @@ inline static void uavlink_message_sensor_variance_decode(const uavlink_message_
 inline static const uavlink_message_t uavlink_message_sensor_variance_encode(uavlink_message_sensor_variance_t* sensor)
 {
     uavlink_message_t msg;
-    msg.cmd = UAVLINK_MSG_SENSOR;
+    msg.cmd = UAVLINK_MSG_SENSOR_VARIANCE;
     msg.len = UAVLINK_MSG_SENSOR_VARIANCE_LEN;
     memcpy(&msg.datas[0],sensor, UAVLINK_MSG_SENSOR_VARIANCE_LEN);
 
