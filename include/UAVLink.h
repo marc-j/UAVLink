@@ -31,6 +31,14 @@ static inline uint16_t _UAVLINK_RETURN_uint16_t(const uavlink_message_t* msg, ui
     return (msg->datas[offset] << 8) + (msg->datas[offset+1] & 0xFF);
 }
 
+static inline uint16_t _UAVLINK_RETURN_uint32_t(const uavlink_message_t* msg, uint8_t offset)
+{
+    uint16_t hsb = (msg->datas[offset] << 8) + (msg->datas[offset+1] & 0xFF);
+    uint16_t lsb = (msg->datas[offset+2] << 8) + (msg->datas[offset+3] & 0xFF);
+
+    return (hsb << 16) + (lsb & 0xFFFF);
+}
+
 #include "msg/MessageSystem.h"
 #include "msg/MessageSensor.h"
 #include "msg/MessageMotor.h"
