@@ -7,9 +7,9 @@
 
 #define UAVLINK_MSG_COMMAND_LEN 10
 typedef struct __uavlink_message_command {
-    uint16_t roll;
-    uint16_t pitch;
-    uint16_t yaw;
+    int16_t roll;
+    int16_t pitch;
+    int16_t yaw;
     uint16_t throttle;
     uint8_t armed;
     uint8_t flightMode;
