@@ -5,7 +5,7 @@
  # PID
  #--------------------------------------------------*/
 
-#define UAVLINK_MSG_PID_LEN 18
+#define UAVLINK_MSG_PID_LEN 22
 typedef struct __uavlink_message_pid {
     uint16_t rollKP;
     uint16_t rollKI;
@@ -16,6 +16,8 @@ typedef struct __uavlink_message_pid {
     uint16_t yawKP;
     uint16_t yawKI;
     uint16_t yawKD;
+    uint16_t stabKP;
+    uint16_t stabKI;
 } uavlink_message_pid_t;
 
 inline static void uavlink_message_pid_decode(const uavlink_message_t* msg, uavlink_message_pid_t* pids)
@@ -30,6 +32,8 @@ inline static void uavlink_message_pid_decode(const uavlink_message_t* msg, uavl
     pids->yawKP = _UAVLINK_RETURN_uint16_t(msg,12);
     pids->yawKI = _UAVLINK_RETURN_uint16_t(msg,14);
     pids->yawKD = _UAVLINK_RETURN_uint16_t(msg,16);
+    pids->stabKP = _UAVLINK_RETURN_uint16_t(msg,18);
+    pids->stabKI = _UAVLINK_RETURN_uint16_t(msg,20);
 #else
     memcpy(pids, _UAVLINK_PAYLOAD(msg), UAVLINK_MSG_PID_LEN );
 #endif

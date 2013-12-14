@@ -5,7 +5,7 @@
  # SENSORS
  #--------------------------------------------------*/
 
-#define UAVLINK_MSG_SENSOR_LEN 24
+#define UAVLINK_MSG_SENSOR_LEN 30
 typedef struct __uavlink_message_sensor {
     int16_t accX;
     int16_t accY;
@@ -19,6 +19,9 @@ typedef struct __uavlink_message_sensor {
     int16_t roll;
     int16_t pitch;
     int16_t yaw;
+    int16_t stabRoll;
+    int16_t stabPitch;
+    int16_t stabYaw;
 } uavlink_message_sensor_t;
 
 inline static void uavlink_message_sensor_decode(const uavlink_message_t* msg, uavlink_message_sensor_t* sensor)
@@ -37,6 +40,9 @@ inline static void uavlink_message_sensor_decode(const uavlink_message_t* msg, u
     sensor->roll = _UAVLINK_RETURN_uint16_t(msg,18);
     sensor->pitch = _UAVLINK_RETURN_uint16_t(msg,20);
     sensor->yaw = _UAVLINK_RETURN_uint16_t(msg,22);
+    sensor->stabRoll = _UAVLINK_RETURN_uint16_t(msg,24);
+    sensor->stabPitch = _UAVLINK_RETURN_uint16_t(msg,26);
+    sensor->stabYaw = _UAVLINK_RETURN_uint16_t(msg,28);
 #else
     memcpy(sensor, _UAVLINK_PAYLOAD(msg), UAVLINK_MSG_SENSOR_LEN);
 #endif
