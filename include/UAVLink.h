@@ -15,12 +15,14 @@ enum UAVLINK_CMD
    UAVLINK_MSG_MOTOR,
    UAVLINK_MSG_SENSOR_RAW,
    UAVLINK_MSG_SENSOR_VARIANCE,
+   UAVLINK_STATE,
+   UAVLINK_ACK
+};
 
-   /* GLOBAL COMMAND */
-   UAVLINK_ACK   = 0xBB,
-   UAVLINK_PING  = 0xCC,
-   UAVLINK_DEBUG = 0xDD,
-   UAVLINK_START = 0xEE
+enum UAVLINK_STATE {
+    UAVLINK_PING  = 0xCC,
+    UAVLINK_DEBUG = 0xDD,
+    UAVLINK_START = 0xEE
 };
 
 enum UAVLINK_STEP {
@@ -101,8 +103,8 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
             *status->ptr++ = byte;
             status->crc ^= byte;
             status->len = byte;
-            if (status->len == 0) {
-                status->step = CRC8;
+            if (status->len <= 0) {
+                status->step = STX1;
             } else {
                 status->step = DTX;
             }
@@ -135,18 +137,18 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
     return UAVLINK_WAITING_MSG;
 }
 
-inline static void uavlink_get_buffer(uint8_t *buffer,uavlink_message_t* msg)
+inline static void uavlink_get_buffer(uint8_t *buffer,uavlink_message_t msg)
 {
     uint8_t crc = 0;
     *buffer++ = 0xFF;
     *buffer++ = 0xFF;
-    *buffer++ = msg->cmd;
-    crc ^= msg->cmd;
-    *buffer++ = msg->len;
-    crc ^= msg->len;
-    for (uint8_t j=0; j< msg->len; j++) {
-        *buffer++ = msg->datas[j];
-        crc ^= msg->datas[j];
+    *buffer++ = msg.cmd;
+    crc ^= msg.cmd;
+    *buffer++ = msg.len;
+    crc ^= msg.len;
+    for (uint8_t j=0; j< msg.len; j++) {
+        *buffer++ = msg.datas[j];
+        crc ^= msg.datas[j];
     }
     *buffer++ = crc;
 }
@@ -162,11 +164,12 @@ inline static const uavlink_message_t uavlink_generate_ack(uint8_t cmd, uint8_t 
     return msg;
 }
 
-inline static const uavlink_message_t uavlink_generate_ping()
+inline static const uavlink_message_t uavlink_generate_state(uint8_t cmd)
 {
     uavlink_message_t msg;
-    msg.cmd = UAVLINK_PING;
-    msg.len = 0;
+    msg.cmd = UAVLINK_STATE;
+    msg.len = 1;
+    msg.datas[0] = cmd;
 
     return msg;
 }
