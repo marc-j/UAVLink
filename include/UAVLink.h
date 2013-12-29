@@ -137,7 +137,7 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
     return UAVLINK_WAITING_MSG;
 }
 
-inline static void uavlink_get_buffer(uint8_t *buffer,uavlink_message_t msg)
+inline static uint16_t uavlink_get_buffer(uint8_t *buffer,uavlink_message_t msg)
 {
     uint8_t crc = 0;
     *buffer++ = 0xFF;
@@ -151,6 +151,8 @@ inline static void uavlink_get_buffer(uint8_t *buffer,uavlink_message_t msg)
         crc ^= msg.datas[j];
     }
     *buffer++ = crc;
+
+    return 4 + msg.len + 1;
 }
 
 inline static const uavlink_message_t uavlink_generate_ack(uint8_t cmd, uint8_t flag)
