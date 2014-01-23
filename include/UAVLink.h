@@ -20,6 +20,7 @@ enum UAVLINK_CMD
 };
 
 enum UAVLINK_STATE {
+    UAVLINK_RCCALIBRATION = 0xBB,
     UAVLINK_PING  = 0xCC,
     UAVLINK_DEBUG = 0xDD,
     UAVLINK_START = 0xEE
@@ -89,6 +90,7 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
         case STX2:
             if (byte == 0xFF) {
                 status->ptr = &status->buffer[0];
+                status->crc = 0;
                 status->step = CTX;
             } else {
                 status->step = STX1;
@@ -131,7 +133,6 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
             }
 
             return UAVLINK_ERROR_MSG;
-            break;
     }
 
     return UAVLINK_WAITING_MSG;
