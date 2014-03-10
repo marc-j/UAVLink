@@ -43,6 +43,12 @@ typedef struct __uavlink_message_status {
           float pitch;
           float yaw;
     } angle;
+    struct {
+        uint16_t throttle;
+        uint16_t roll;
+        uint16_t pitch;
+        uint16_t yaw;
+    } rc;
     uint8_t frameType;
     uint8_t version;
 } uavlink_message_status_t;
@@ -52,12 +58,12 @@ inline static void uavlink_message_status_decode(const uavlink_message_t* msg, u
     memcpy(status, _UAVLINK_PAYLOAD(msg), sizeof(uavlink_message_status_t) );
 }
 
-inline static const uavlink_message_t uavlink_message_status_encode(uavlink_message_status_t* pids)
+inline static const uavlink_message_t uavlink_message_status_encode(uavlink_message_status_t* status)
 {
     uavlink_message_t msg;
     msg.cmd = UAVLINK_MSG_STATUS;
     msg.len = sizeof(uavlink_message_status_t);
-    memcpy(&msg.datas[0],pids, sizeof(uavlink_message_status_t));
+    memcpy(&msg.datas[0],status, sizeof(uavlink_message_status_t));
 
     return msg;
 }
