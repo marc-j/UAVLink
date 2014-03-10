@@ -24,24 +24,24 @@
 
 typedef struct __uavlink_message_status {
     struct {
-          float x;
-          float y;
-          float z;
+          int16_t x;
+          int16_t y;
+          int16_t z;
     } acc;
     struct {
-          float x;
-          float y;
-          float z;
+          int16_t x;
+          int16_t y;
+          int16_t z;
     } gyro;
     struct {
-          float x;
-          float y;
-          float z;
+          int16_t x;
+          int16_t y;
+          int16_t z;
     } mag;
     struct {
-          float roll;
-          float pitch;
-          float yaw;
+          int16_t roll; // roll deg * 100
+          int16_t pitch; // pitch deg * 100
+          int16_t yaw; // yaw deg * 100
     } angle;
     struct {
         uint16_t throttle;
