@@ -15,6 +15,7 @@ enum UAVLINK_CMD
    UAVLINK_MSG_MOTOR,
    UAVLINK_MSG_SENSOR_RAW,
    UAVLINK_MSG_SENSOR_VARIANCE,
+   UAVLINK_MSG_RC_CALIBRATION,
    UAVLINK_MSG_STATUS,
    UAVLINK_STATE,
    UAVLINK_ACK
@@ -190,5 +191,6 @@ inline static const uavlink_message_t uavlink_generate_state(uint8_t cmd)
 #include "msg/MessageSensorRaw.h"
 #include "msg/MessageSensorVariance.h"
 #include "msg/MessageStatus.h"
+#include "msg/MessageRCCalibration.h"
 
 #endif // UAVLINK_MESSAGE_H
