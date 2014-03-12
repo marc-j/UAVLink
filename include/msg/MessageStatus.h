@@ -49,6 +49,8 @@ typedef struct __uavlink_message_status {
         uint16_t pitch;
         uint16_t yaw;
     } rc;
+
+    float altSonar;
     uint8_t frameType;
     uint8_t version;
 } uavlink_message_status_t;
