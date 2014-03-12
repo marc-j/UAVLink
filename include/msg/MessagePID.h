@@ -21,6 +21,8 @@ typedef struct __uavlink_message_pid {
         uavlink_pid tilt;
         uavlink_pid yaw;
         uavlink_pid level;
+
+        uavlink_pid altSonar;
 } uavlink_message_pid_t;
 
 inline static void uavlink_message_pid_decode(const uavlink_message_t* msg, uavlink_message_pid_t* pids)
