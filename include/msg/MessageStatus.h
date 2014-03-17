@@ -51,6 +51,7 @@ typedef struct __uavlink_message_status {
     } rc;
 
     float altSonar;
+    float altBaro;
     uint8_t frameType;
     uint8_t version;
 } uavlink_message_status_t;
