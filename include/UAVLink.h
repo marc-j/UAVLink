@@ -89,12 +89,12 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
 {
     switch(status->step) {
         case STX1:
-            if (byte == 0xFF) {
+            if (byte == 0x55) { // 'U'
                 status->step = STX2;
             }
             break;
         case STX2:
-            if (byte == 0xFF) {
+            if (byte == 0x4C) { // 'L'
                 status->ptr = &status->buffer[0];
                 status->crc = 0;
                 status->step = CTX;

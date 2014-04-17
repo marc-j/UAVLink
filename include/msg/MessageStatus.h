@@ -50,6 +50,14 @@ typedef struct __uavlink_message_status {
         uint16_t yaw;
     } rc;
 
+    struct {
+    	double lat;
+    	double lon;
+    	float height;
+    	float hAcc;
+    	float vAcc;
+    } gps;
+
     float altSonar;
     float altBaro;
     uint8_t frameType;
