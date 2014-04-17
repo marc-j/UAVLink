@@ -147,8 +147,8 @@ static inline uint8_t uavlink_parse(uint8_t byte, uavlink_status* status, uavlin
 inline static uint16_t uavlink_get_buffer(uint8_t *buffer,uavlink_message_t msg)
 {
     uint8_t crc = 0;
-    *buffer++ = 0xFF;
-    *buffer++ = 0xFF;
+    *buffer++ = 0x55;
+    *buffer++ = 0x4C;
     *buffer++ = msg.cmd;
     crc ^= msg.cmd;
     *buffer++ = msg.len;
