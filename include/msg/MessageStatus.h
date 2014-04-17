@@ -51,11 +51,16 @@ typedef struct __uavlink_message_status {
     } rc;
 
     struct {
+    	uint32_t iTOW;
+
     	double lat;
     	double lon;
     	float height;
     	float hAcc;
     	float vAcc;
+
+    	uint8_t sats;
+    	uint8_t fixType;
     } gps;
 
     float altSonar;
