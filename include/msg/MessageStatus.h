@@ -68,7 +68,7 @@ typedef struct __uavlink_message_status {
     uint8_t frameType;
     uint8_t version;
     uint16_t fcLoopTimeUS;
-    uint8_t fcLoopReloadTimeSEC;
+    uint16_t fcLoopReloadTimeUS;
 } uavlink_message_status_t;
 
 inline static void uavlink_message_status_decode(const uavlink_message_t* msg, uavlink_message_status_t* status)
